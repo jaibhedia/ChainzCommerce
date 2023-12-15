@@ -1,7 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
 import { ethers } from "ethers";
-import { Row, Form, Button } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
+import { GrInstagram, GrTwitter } from "react-icons/gr";
+import { FaFacebook } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import logo from "./assets/logo.jpeg";
+
 // import { create as ipfsHttpClient } from 'ipfs-http-client'
 // const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -112,64 +117,112 @@ const Create = ({ marketplace, nft }) => {
     await (await marketplace.makeItem(nft.address, id, listingPrice)).wait();
   };
   return (
-    <div className="container mx-auto mt-20 min-h-screen relative">
-      <main className="max-w-2xl mx-auto bg-none border-3 border-gray-500 p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-6 text-white">Create Your NFT</h1>
-        <div className="space-y-4">
-          <div className="mb-4">
-            <label className="block text-white text-lg">Upload NFT File</label>
-            <input
-              onChange={(e) => setFile(e.target.files[0])}
-              className="form-input-lg mt-2 text-white border border-gray-300 p-2 w-full rounded-md"
-              required
-              type="file"
-              name="file"
-            />
+    <>
+      <div className="container mx-auto py-10  p-10 sm:mt-20 min-h-screen relative">
+        <main className="max-w-2xl p-8 mx-auto  mt-14 bg-none border-3 border-gray-500  rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold mb-6 text-white">
+            Create Your NFT
+          </h1>
+          <div className="space-y-4">
+            <div className="mb-4">
+              <label className="block text-white text-lg">
+                Upload NFT File
+              </label>
+              <input
+                onChange={(e) => setFile(e.target.files[0])}
+                className="form-input-lg mt-2 text-white border border-gray-300 p-2 w-full rounded-md"
+                required
+                type="file"
+                name="file"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-white text-left text-lg">Name</label>
+              <input
+                onChange={(e) => setName(e.target.value)}
+                className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
+                required
+                type="text"
+                placeholder="Name"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-left text-white text-lg">
+                Description
+              </label>
+              <textarea
+                onChange={(e) => setDescription(e.target.value)}
+                className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
+                required
+                placeholder="Description"
+              ></textarea>
+            </div>
+            <div className="mb-4">
+              <label className="block text-left text-white text-lg">
+                Price in ETH
+              </label>
+              <input
+                onChange={(e) => setPrice(e.target.value)}
+                className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
+                required
+                type="number"
+                placeholder="Price in ETH"
+              />
+            </div>
+            <div className="flex items-center justify-center">
+              <button
+                onClick={sendFileToIPFS}
+                className="bg-none border-3 border-blue-600 text-white py-3 px-8 rounded-none hover:bg-blue-600 transition duration-300"
+              >
+                Create & List Your NFT!
+              </button>
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-white text-left text-lg">Name</label>
-            <input
-              onChange={(e) => setName(e.target.value)}
-              className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
-              required
-              type="text"
-              placeholder="Name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-left text-white text-lg">
-              Description
-            </label>
-            <textarea
-              onChange={(e) => setDescription(e.target.value)}
-              className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
-              required
-              placeholder="Description"
-            ></textarea>
-          </div>
-          <div className="mb-4">
-            <label className="block text-left text-white text-lg">
-              Price in ETH
-            </label>
-            <input
-              onChange={(e) => setPrice(e.target.value)}
-              className="form-input-lg mt-2 border border-gray-300 p-2 w-full rounded-md"
-              required
-              type="number"
-              placeholder="Price in ETH"
-            />
-          </div>
-          <div className="flex items-center justify-center">
-            <button
-              onClick={sendFileToIPFS}
-              className="bg-none border-3 border-blue-600 text-white py-3 px-8 rounded-none hover:bg-blue-600 transition duration-300"
-            >
-              Create & List Your NFT!
-            </button>
-          </div>
+        </main>
+      </div>
+
+      <div className="bg-none text-white p-4 flex flex-row justify-between items-center">
+        <div className="flex-shrink-0">
+          <img src={logo} className="w-20 h-20 rounded-full" alt="logo" />
         </div>
-      </main>
-    </div>
+        <div className=" flex flex-row space-x-4">
+          <Nav.Link
+            as={Link}
+            to="/"
+            className=" hover:text-white text-white  hover:scale-110"
+          >
+            Home
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/"
+            href="about"
+            className=" hover:text-white text-white  hover:scale-110"
+          >
+            About
+          </Nav.Link>
+          <Nav.Link
+            as={Link}
+            to="/"
+            href="help"
+            className=" hover:text-white text-white  hover:scale-110"
+          >
+            Help
+          </Nav.Link>
+        </div>
+        <div className="flex flex-row space-x-4 ">
+          <a href="#" className="text-xl hover:text-white hover:scale-110">
+            <GrTwitter />
+          </a>
+          <a href="#" className="text-xl hover:text-white hover:scale-110">
+            <FaFacebook />
+          </a>
+          <a href="#" className="text-xl hover:text-white hover:scale-110">
+            <GrInstagram />
+          </a>
+        </div>
+      </div>
+    </>
   );
 };
 
