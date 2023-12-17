@@ -10,9 +10,10 @@ import NFTAbi from "../contractsData/NFT.json";
 import NFTAddress from "../contractsData/NFT-address.json";
 import { useState } from "react";
 import { ethers } from "ethers";
-import { Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 import "./App.css";
+import Connect from "./Connect.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -61,17 +62,7 @@ function App() {
         </>
         <div>
           {loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "80vh",
-              }}
-            >
-              <Spinner animation="border" style={{ display: "flex" }} />
-              <p className="mx-3 my-0">Waiting for a Metamask Connection...</p>
-            </div>
+            <Connect onConnect={web3Handler} />
           ) : (
             <Routes>
               <Route
