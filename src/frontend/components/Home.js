@@ -14,51 +14,11 @@ import { FaFacebook } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./styles/style.css";
 
-const Home = ({ marketplace, nft, account, web3Handler }) => {
-  const [loading, setLoading] = useState(true);
+const Home = ({ web3Handler, account }) => {
   const sectionRef = useRef(null);
-  const [items, setItems] = useState([]);
-  const loadMarketplaceItems = async () => {
-    // Load all unsold items
-    const itemCount = await marketplace.itemCount();
-    let items = [];
-    for (let i = 1; i <= itemCount; i++) {
-      const item = await marketplace.items(i);
-      if (!item.sold) {
-        // get uri url from nft contract
-        const uri = await nft.tokenURI(item.tokenId);
-        // use uri to fetch the nft metadata stored on ipfs
-        const response = await fetch(uri);
-        const metadata = await response.json();
-        // get total price of item (item price + fee)
-        const totalPrice = await marketplace.getTotalPrice(item.itemId);
-        // Add item to items array
-        items.push({
-          totalPrice,
-          itemId: item.itemId,
-          seller: item.seller,
-          name: metadata.name,
-          description: metadata.description,
-          image: metadata.image,
-        });
-      }
-    }
-    setLoading(false);
-    setItems(items);
-  };
-
-  const buyMarketItem = async (item) => {
-    await (
-      await marketplace.purchaseItem(item.itemId, { value: item.totalPrice })
-    ).wait();
-    loadMarketplaceItems();
-  };
   useEffect(() => {
     const section = sectionRef.current;
     section.classList.add("fade-in");
-  }, []);
-  useEffect(() => {
-    loadMarketplaceItems();
   }, []);
   return (
     <>

@@ -14,6 +14,7 @@ import { Button, Spinner } from "react-bootstrap";
 
 import "./App.css";
 import Connect from "./Connect.js";
+import { MyMarketPlace } from "./MyMarketPlace.js";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -67,11 +68,15 @@ function App() {
             <Routes>
               <Route
                 path="/"
+                element={<Home account={account} web3Handler={web3Handler} />}
+              />
+              <Route
+                path="/my-marketplace"
                 element={
-                  <Home
+                  <MyMarketPlace
+                    account={account}
                     marketplace={marketplace}
                     nft={nft}
-                    account={account}
                     web3Handler={web3Handler}
                   />
                 }
