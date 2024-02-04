@@ -43,6 +43,13 @@ const Navigation = ({ web3Handler, account }) => {
                 Home
               </Nav.Link>
               <Nav.Link
+                className="text-white hover:scale-110  hover:bg-black/50 hover:rounded-none"
+                as={Link}
+                to="/my-marketplace"
+              >
+                Your Marketplace
+              </Nav.Link>
+              <Nav.Link
                 as={Link}
                 className="text-white hover:scale-110  hover:bg-black/50 hover:rounded-none"
                 to="/create"

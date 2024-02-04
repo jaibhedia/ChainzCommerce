@@ -70,27 +70,33 @@ export default function MyListedItems({ marketplace, nft, account }) {
       </main>
     );
   return (
-    <div className="flex justify-center">
+    <div className="container mx-auto mt-16">
       {listedItems.length > 0 ? (
-        <div className="px-5 py-3 container">
-          <h2>Listed</h2>
-          <Row xs={1} md={2} lg={4} className="g-4 py-3">
+        <div className="mt-8">
+          <h2 className="text-3xl font-bold mb-4">Listed Items</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {listedItems.map((item, idx) => (
-              <Col key={idx} className="overflow-hidden">
-                <Card>
-                  <Card.Img variant="top" src={item.image} />
-                  <Card.Footer>
-                    {ethers.utils.formatEther(item.totalPrice)} ETH
-                  </Card.Footer>
-                </Card>
-              </Col>
+              <div key={idx} className="mb-8">
+                <div className="bg-white p-6 rounded-lg shadow-md">
+                  <img
+                    className="w-full h-48 object-cover mb-4"
+                    src={item.image}
+                    alt={item.name}
+                  />
+                  <div className="text-primary">
+                    <p className="text-lg font-semibold mb-2">
+                      {ethers.utils.formatEther(item.totalPrice)} ETH
+                    </p>
+                  </div>
+                </div>
+              </div>
             ))}
-          </Row>
+          </div>
           {soldItems.length > 0 && renderSoldItems(soldItems)}
         </div>
       ) : (
-        <main style={{ padding: "1rem 0" }}>
-          <h2>No listed assets</h2>
+        <main className="p-4 text-center">
+          <h2 className="text-2xl font-semibold">No listed assets</h2>
         </main>
       )}
     </div>
